@@ -19,5 +19,5 @@ Todo o processo do pedido — desde a escolha dos itens até a finalização —
 ### 📅 2025-09-08
 - [X] adicinoado template do restaurante
 - [X] adicionar, editar e remover restaurantes
-- [] validação dos dados para criar e adicionar
-- [] tratamente de erro no controlador do restaurante (Criar, Editar, Deletar)
+- [ ] validação dos dados para criar e adicionar
+- [ ] tratamente de erro no controlador do restaurante (Criar, Editar, Deletar)
