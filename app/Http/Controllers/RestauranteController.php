@@ -22,7 +22,7 @@ class RestauranteController extends Controller
      */
     public function create()
     {
-        //
+        return view('restaurante.create');
     }
 
     /**
@@ -30,15 +30,29 @@ class RestauranteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $restaurante = new Restaurante();
+        $restaurante->nome_fantasia = $request->nome_fantasia;
+        $restaurante->razao_social = $request->razao_social;
+        $restaurante->endereco = $request->endereco;
+        $restaurante->telefone = $request->telefone;
+        $restaurante->gerente = $request->gerente;
+        $restaurante->is_aberto = $request->is_aberto;
+
+        $restaurante->save();
+
+        //Restaurante::create($request->all());
+
+        return redirect()->route('restaurantes.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Restaurante $restaurante)
     {
-        //
+        return view('restaurante.show', [
+            'restaurante' => $restaurante
+        ]);
     }
 
     /**
@@ -46,22 +60,32 @@ class RestauranteController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Restaurante $restaurante)
     {
-        //
+
+        $restaurante->nome_fantasia = $request->nome_fantasia;
+        $restaurante->razao_social = $request->razao_social;
+        $restaurante->endereco = $request->endereco;
+        $restaurante->telefone = $request->telefone;
+        $restaurante->gerente = $request->gerente;
+        $restaurante->is_aberto = $request->is_aberto;
+        $restaurante->save();
+        
+        return redirect()->route('restaurantes.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Restaurante $restaurante)
     {
-        //
+        $restaurante->delete();
+        return redirect()->route('restaurantes.index');
     }
 }

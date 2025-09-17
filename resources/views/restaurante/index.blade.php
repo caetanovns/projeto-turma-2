@@ -8,27 +8,62 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="flex justify-end">
+                    <a class="m-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                        href="{{ route('restaurantes.create') }}">Adicionar</a>
+                </div>
+
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="overflow-x-auto">
                         <table class="min-w-full  shadow-md rounded-lg overflow-hidden">
                             <thead class="bg-gray-200 text-gray-700">
-                            <tr>
-                                <th class="py-3 px-4 text-left">Nome</th>
-                                <th class="py-3 px-4 text-left">Razão Social</th>
-                                <th class="py-3 px-4 text-left">Telefone</th>
-                                <th class="py-3 px-4 text-left">Gerente</th>
-                                <th class="py-3 px-4 text-left">Aberto</th>
-                            </tr>
+                                <tr>
+                                    <th class="py-3 px-4 text-left">Nome</th>
+                                    <th class="py-3 px-4 text-left">Razão Social</th>
+                                    <th class="py-3 px-4 text-left">Telefone</th>
+                                    <th class="py-3 px-4 text-left">Gerente</th>
+                                    <th class="py-3 px-4 text-center">Aberto</th>
+                                    <th class="py-3 px-4 text-center">Ações</th>
+                                </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
                                 @foreach($restaurantes as $restaurante)
-                                    <tr>
-                                        <td class="py-3 px-4">{{$restaurante->nome_fantasia}}</td>
-                                        <td class="py-3 px-4">{{$restaurante->razao_social}}</td>
-                                        <td class="py-3 px-4">{{$restaurante->telefone}}n</td>
-                                        <td class="py-3 px-4">{{$restaurante->gerente}}</td>
-                                        <td class="py-3 px-4">{{$restaurante->is_aberto}}</td>
-                                    </tr>
+                                <tr>
+                                    <td class="py-3 px-4">{{$restaurante->nome_fantasia}}</td>
+                                    <td class="py-3 px-4">{{$restaurante->razao_social}}</td>
+                                    <td class="py-3 px-4">{{$restaurante->telefone}}</td>
+                                    <td class="py-3 px-4">{{$restaurante->gerente}}</td>
+                                    <td class="py-3 px-4 text-center">
+                                        @if($restaurante->is_aberto)
+                                        <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">
+                                            ABERTO
+                                        </span>
+                                        @else
+                                        <span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300">
+                                            FECHADO
+                                        </span>
+                                        @endif
+                                    </td>
+                                    <td class="flex justify-between p-2">
+                                        <a href="{{route('restaurantes.show', $restaurante->id)}}" class="text-blue-700 border border-blue-700 hover:bg-blue-300 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28" />
+                                            </svg>
+                                            <span class="sr-only">Icon description</span>
+                                        </a>
+
+                                        <form method="POST" action="{{route('restaurantes.destroy',$restaurante->id)}}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-blue-700 border border-red-700 hover:bg-red-300 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800 dark:hover:bg-red-500">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                                                </svg>
+                                                <span class="sr-only">Icon description</span>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
