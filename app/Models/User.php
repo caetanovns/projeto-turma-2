@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Cliente;
+use App\Models\Restaurante;
 
 class User extends Authenticatable
 {
@@ -50,4 +51,9 @@ class User extends Authenticatable
     public function cliente(){
         return $this->hasOne(Cliente::class);
     }
+    
+    public function restaurante(){
+        return $this->hasMany(Restaurante::class);
+    }
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Restaurante;
+use App\Models\User;
 
 class RestauranteController extends Controller
 {
@@ -22,7 +23,9 @@ class RestauranteController extends Controller
      */
     public function create()
     {
-        return view('restaurante.create');
+        return view('restaurante.create', [
+            'users' => User::all()
+        ]);
     }
 
     /**
@@ -30,6 +33,17 @@ class RestauranteController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'nome_fantasia' => 'required|string|max:255',
+            'razao_social' => 'required|string|max:255',
+            'endereco' => 'required|string|max:255',
+            'telefone' => 'required|string|max:20',
+            'gerente' => 'required|string|max:255',
+            'is_aberto' => 'required|boolean',
+            'user_id' => 'nullable|exists:users,id',
+        ]);
+
         $restaurante = new Restaurante();
         $restaurante->nome_fantasia = $request->nome_fantasia;
         $restaurante->razao_social = $request->razao_social;
@@ -37,10 +51,9 @@ class RestauranteController extends Controller
         $restaurante->telefone = $request->telefone;
         $restaurante->gerente = $request->gerente;
         $restaurante->is_aberto = $request->is_aberto;
+        $restaurante->user_id = $request->user_id;
 
         $restaurante->save();
-
-        //Restaurante::create($request->all());
 
         return redirect()->route('restaurantes.index');
     }
@@ -58,10 +71,7 @@ class RestauranteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        
-    }
+    public function edit(string $id) {}
 
     /**
      * Update the specified resource in storage.
@@ -69,6 +79,15 @@ class RestauranteController extends Controller
     public function update(Request $request, Restaurante $restaurante)
     {
 
+        $request->validate([
+            'nome_fantasia' => 'required|string|max:255',
+            'razao_social' => 'required|string|max:255',
+            'endereco' => 'required|string|max:255',
+            'telefone' => 'required|string|max:20',
+            'gerente' => 'required|string|max:255',
+            'is_aberto' => 'required|boolean',
+        ]);
+        
         $restaurante->nome_fantasia = $request->nome_fantasia;
         $restaurante->razao_social = $request->razao_social;
         $restaurante->endereco = $request->endereco;
@@ -76,7 +95,7 @@ class RestauranteController extends Controller
         $restaurante->gerente = $request->gerente;
         $restaurante->is_aberto = $request->is_aberto;
         $restaurante->save();
-        
+
         return redirect()->route('restaurantes.index');
     }
 
