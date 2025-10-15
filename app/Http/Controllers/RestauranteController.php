@@ -43,18 +43,8 @@ class RestauranteController extends Controller
             'is_aberto' => 'required|boolean',
             'user_id' => 'nullable|exists:users,id',
         ]);
-
-        $restaurante = new Restaurante();
-        $restaurante->nome_fantasia = $request->nome_fantasia;
-        $restaurante->razao_social = $request->razao_social;
-        $restaurante->endereco = $request->endereco;
-        $restaurante->telefone = $request->telefone;
-        $restaurante->gerente = $request->gerente;
-        $restaurante->is_aberto = $request->is_aberto;
-        $restaurante->user_id = $request->user_id;
-
-        $restaurante->save();
-
+        
+        Restaurante::create($request->all());
         return redirect()->route('restaurantes.index');
     }
 

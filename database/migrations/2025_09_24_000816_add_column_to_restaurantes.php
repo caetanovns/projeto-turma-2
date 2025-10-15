@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('restaurantes', function (Blueprint $table) {
-            $table->foreignId('user_id')->nullable()->constrained(User::class);
+            $table->foreignIdFor(User::class)->nullable()->constrained();
         });
     }
 

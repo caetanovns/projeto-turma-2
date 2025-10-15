@@ -14,6 +14,20 @@ class Restaurante extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = [
+        'nome_fantasia',
+        'razao_social',
+        'endereco',
+        'telefone',
+        'gerente',
+        'is_aberto',
+        'user_id',
+    ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     public function produtos(){
         return $this->hasMany(Produto::class);
     }
