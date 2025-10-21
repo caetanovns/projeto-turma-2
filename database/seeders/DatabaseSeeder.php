@@ -15,12 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        /*
         $this->call([
             ProdutoCategoriaSeeder::class,
             StatusPedidoSeeder::class,
         ]);
-        */
-        Restaurante::factory(30)->create();
+        //Restaurante::factory(30)->create();
     }
 }

@@ -11,7 +11,7 @@ class Produto extends Model
 {
     
     public function categoria(){
-        return $this->belongsTo(ProdutoCategoria::class);
+        return $this->belongsTo(ProdutoCategoria::class, 'produto_categorias_id');
     }
 
     public function restaurante(){
