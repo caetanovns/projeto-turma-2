@@ -22,6 +22,7 @@
                                     <th class="py-3 px-4 text-left">Razão Social</th>
                                     <th class="py-3 px-4 text-left">Telefone</th>
                                     <th class="py-3 px-4 text-left">Gerente</th>
+                                    <th class="py-3 px-4 text-left">Usuário</th>
                                     <th class="py-3 px-4 text-center">Aberto</th>
                                     <th class="py-3 px-4 text-center">Ações</th>
                                 </tr>
@@ -33,6 +34,7 @@
                                     <td class="py-3 px-4">{{$restaurante->razao_social}}</td>
                                     <td class="py-3 px-4">{{$restaurante->telefone}}</td>
                                     <td class="py-3 px-4">{{$restaurante->gerente}}</td>
+                                    <td class="py-3 px-4">{{$restaurante->user->name}}</td>
                                     <td class="py-3 px-4 text-center">
                                         @if($restaurante->is_aberto)
                                         <span class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">

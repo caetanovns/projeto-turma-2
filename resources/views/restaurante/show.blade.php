@@ -41,6 +41,15 @@
                                 <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gerente</label>
                                 <input type="text" id="base-input" name="gerente" value="{{$restaurante->gerente}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             </div>
+                            <div class="mb-5">
+                                <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usuário de acesso</label>
+                                <select id="countries" name="user_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value=""></option>
+                                    @foreach($users as $user)
+                                    <option {{ $restaurante->user?->id == $user->id ? 'selected' : '' }} value="{{$user->id}}">{{$user->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Está aberto?</label>
                             <select id="countries" name="is_aberto" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option selected value="{{$restaurante->is_aberto}}">{{$restaurante->is_aberto ? 'Sim': 'Não'}}</option>

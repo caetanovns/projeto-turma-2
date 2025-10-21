@@ -54,7 +54,8 @@ class RestauranteController extends Controller
     public function show(Restaurante $restaurante)
     {
         return view('restaurante.show', [
-            'restaurante' => $restaurante
+            'restaurante' => $restaurante,
+            'users' => User::all()
         ]);
     }
 
@@ -84,6 +85,7 @@ class RestauranteController extends Controller
         $restaurante->telefone = $request->telefone;
         $restaurante->gerente = $request->gerente;
         $restaurante->is_aberto = $request->is_aberto;
+        $restaurante->user_id = $request->user_id;
         $restaurante->save();
 
         return redirect()->route('restaurantes.index');
