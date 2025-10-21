@@ -22,7 +22,10 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        return view('produtos.create', [
+            'categorias' => \App\Models\ProdutoCategoria::all(),
+            'restaurantes' => \App\Models\Restaurante::all()
+        ]);
     }
 
     /**
@@ -30,7 +33,17 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nome' => 'required|string|max:255',
+            'descricao' => 'nullable|string',
+            'preco' => 'required|numeric',
+            'produto_categorias_id' => 'required|exists:produto_categorias,id',
+            'restaurante_id' => 'required|exists:restaurantes,id',
+        ]);
+
+        Produto::create($request->all());
+
+        return redirect()->route('produtos.index');
     }
 
     /**
@@ -46,7 +59,11 @@ class ProdutoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('produtos.edit', [
+            'produto' => Produto::findOrFail($id),
+            'categorias' => \App\Models\ProdutoCategoria::all(),
+            'restaurantes' => \App\Models\Restaurante::all()
+        ]);
     }
 
     /**
@@ -54,7 +71,18 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'nome' => 'required|string|max:255',
+            'descricao' => 'nullable|string',
+            'preco' => 'required|numeric',
+            'produto_categorias_id' => 'required|exists:produto_categorias,id',
+            'restaurante_id' => 'required|exists:restaurantes,id',
+        ]);
+
+        $produto = Produto::findOrFail($id);
+        $produto->update($request->all());
+
+        return redirect()->route('produtos.index');
     }
 
     /**
@@ -62,6 +90,9 @@ class ProdutoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $produto = Produto::findOrFail($id);
+        $produto->delete();
+
+        return redirect()->route('produtos.index');
     }
 }

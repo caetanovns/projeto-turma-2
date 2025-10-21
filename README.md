@@ -25,8 +25,10 @@ Todo o processo do pedido — desde a escolha dos itens até a finalização —
 - [X] adicionar usuário vinculado ao restaurante.
 ### 2025-10-14
 - [X] correção do erro ao criar restaurante com usuário associado.
+### 2025-10-21
+- [X] adicionado cardápio do restaurante
+- [X] Editar do restaurante.
 - [ ] criar tipos diferentes de usuários. Admin | Restaurante | Cliente
 - [ ] admin administra os restaurantes
 - [ ] resturante administra seu cardápio
 - [ ] cliente faz pedido.
-### 
